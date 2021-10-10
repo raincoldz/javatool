@@ -1,7 +1,4 @@
-package top.raincold;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package top.raincold.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,5 +58,21 @@ public class PropertiesUtils {
         }
 
         return properties;
+    }
+
+    public static Boolean getDefaultTrueBoolean(String key) {
+        String value = PropertiesUtils.getValue(key);
+        if (value == null) {
+            return Boolean.TRUE;
+        }
+        return Boolean.parseBoolean(value);
+    }
+
+    public static Boolean getDefaultFalseBoolean(String key) {
+        String value = PropertiesUtils.getValue(key);
+        if (value == null) {
+            return Boolean.FALSE;
+        }
+        return Boolean.parseBoolean(value);
     }
 }

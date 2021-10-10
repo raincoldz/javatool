@@ -27,6 +27,15 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.32</version>
         </dependency>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -40,7 +49,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>top.raincold.ExcelDivide</mainClass>  <!--修改这里面为main的权限定类名-->
+                            <mainClass>top.raincold.App</mainClass>  <!--修改这里面为main的权限定类名-->
                         </manifest>
                     </archive>
                 </configuration>
