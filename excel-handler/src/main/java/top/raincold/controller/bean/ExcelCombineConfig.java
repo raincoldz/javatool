@@ -18,6 +18,11 @@ public class ExcelCombineConfig extends Config {
      * 操作需要合并的列
      */
     private Integer combineColumn;
+    
+    /**
+     * 分隔符
+     */
+    private String separator;
 
     /**
      * 是否在末尾添加个数统计列

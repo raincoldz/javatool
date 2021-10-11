@@ -3,6 +3,7 @@ package top.raincold.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.raincold.controller.enums.ModeEnum;
+import top.raincold.controller.impl.ExcelCombineConfigParser;
 import top.raincold.controller.impl.ExcelSplitConfigParser;
 import top.raincold.util.PropertiesUtils;
 
@@ -26,6 +27,7 @@ public class ConfigParserFactory{
         if (ModeEnum.ONE.getValue().equals(mode)) {
             configParser = new ExcelSplitConfigParser();
         } else if (ModeEnum.TWO.getValue().equals(mode)) {
+            configParser = new ExcelCombineConfigParser();
         } else if (ModeEnum.THREE.getValue().equals(mode)) {
         }
 
