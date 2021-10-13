@@ -1,9 +1,6 @@
 package top.raincold.util;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -87,9 +84,9 @@ public class ExcelUtils {
                 cell.setCellValue(isStringEmpty(header.get(column)) ? "" : header.get(column));
             }
 
-            for (int i = 1; i < table.size(); i++) {
+            for (int i = 0; i < table.size(); i++) {
                 List<String> line = table.get(i);
-                Row row = sheet.createRow(i);
+                Row row = sheet.createRow(i+1);
                 for (int j = 0; j < line.size(); j++) {
                     Cell cell = row.createCell(j);
                     cell.setCellValue(isStringEmpty(line.get(j)) ? "" : line.get(j));

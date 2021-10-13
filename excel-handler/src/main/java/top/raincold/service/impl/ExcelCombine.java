@@ -54,15 +54,13 @@ public class ExcelCombine extends AbstractExcelServiceImpl {
         ExcelUtils.exportExcel(workbook, 0, "Sheet1", header, finalTable);
         workbook.write(out);
         log.info("Excel已完成合并并导出，保存地址为:{}", savePath);
-        System.out.println(String.format("Excel已完成合并并导出，保存地址为:{}", savePath));
+        System.out.println(String.format("Excel已完成合并并导出，保存地址为:%s", savePath));
         out.close();
     }
 
 
     private List<String> combine(List<List<String>> table, int baseColumn, int combineColumn, String separator, boolean createStatisticsColumn) {
         List<String> result = new ArrayList<>();
-        String baseStr = table.get(table.size() - 1).get(combineColumn);
-        result.add(baseStr);
 
         Set<String> set = new HashSet<>();
         for (int i = 0; i < table.size(); i++) {
@@ -77,8 +75,17 @@ public class ExcelCombine extends AbstractExcelServiceImpl {
             if (count < set.size() - 1) {
                 sb.append(separator);
             }
+            count++;
         }
-        result.add(sb.toString());
+
+        List<String> firstLine = table.get(0);
+        for (int i = 0; i < firstLine.size(); i++) {
+            if (i == combineColumn) {
+                result.add(sb.toString());
+            } else {
+                result.add(firstLine.get(i));
+            }
+        }
 
         if (createStatisticsColumn) {
             result.add(String.valueOf(set.size()));

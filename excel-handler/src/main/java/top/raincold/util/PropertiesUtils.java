@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class PropertiesUtils {
 
-    private static Properties properties = null;
+    private static Properties properties = loadConfProperties();
 
     /**
      * 根据key获取value值
@@ -23,6 +23,13 @@ public class PropertiesUtils {
         String value = properties.getProperty(key);
         System.out.println("从配置文件读取参数： " + key + " -->> " + value);
         return value;
+    }
+
+    public static boolean containsKey(String key) {
+        if (properties == null) {
+            properties = loadConfProperties();
+        }
+        return properties.containsKey(key);
     }
 
     /**

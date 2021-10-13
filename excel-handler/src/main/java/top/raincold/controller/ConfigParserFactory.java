@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.raincold.controller.enums.ModeEnum;
 import top.raincold.controller.impl.ExcelCombineConfigParser;
+import top.raincold.controller.impl.ExcelMoveFileConfigParser;
 import top.raincold.controller.impl.ExcelSplitConfigParser;
 import top.raincold.util.PropertiesUtils;
 
@@ -14,10 +15,11 @@ public class ConfigParserFactory{
     private static Logger log = LoggerFactory.getLogger(ConfigParserFactory.class);
 
     public static ConfigParser getParseConfig() {
+        printLogo();
         Scanner in = new Scanner(System.in);
         Integer mode = null;
-        if (PropertiesUtils.getValue("mode") == null) {
-            System.out.println("请输入要选择的模式,1：按列分割 2：按列合并 3：文件夹复制");
+        if (!PropertiesUtils.containsKey("mode")) {
+            printNotice();
             mode = Integer.valueOf(in.nextLine());
         } else {
             mode = Integer.valueOf(PropertiesUtils.getValue("mode"));
@@ -29,8 +31,28 @@ public class ConfigParserFactory{
         } else if (ModeEnum.TWO.getValue().equals(mode)) {
             configParser = new ExcelCombineConfigParser();
         } else if (ModeEnum.THREE.getValue().equals(mode)) {
+            configParser = new ExcelMoveFileConfigParser();
         }
 
         return configParser;
+    }
+
+    private static void printLogo() {
+        System.out.println("\n" +
+                " ____       _                 _     _\n" +
+                "|  _ \\ __ _(_)_ __   ___ ___ | | __| |\n" +
+                "| |_) / _` | | '_ \\ / __/ _ \\| |/ _` |\n" +
+                "|  _ < (_| | | | | | (_| (_) | | (_| |\n" +
+                "|_| \\_\\__,_|_|_| |_|\\___\\___/|_|\\__,_|\n" +
+                "\n");
+    }
+
+    private static void printNotice() {
+        System.out.println("==================================");
+        System.out.println("** 请输入要选择的模式，以回车键结束");
+        System.out.println("** 1：按列分割");
+        System.out.println("** 2：按列合并");
+        System.out.println("** 3：文件夹复制");
+        System.out.println("==================================");
     }
 }

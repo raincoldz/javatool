@@ -18,7 +18,7 @@ public class ExcelCombineConfig extends Config {
      * 操作需要合并的列
      */
     private Integer combineColumn;
-    
+
     /**
      * 分隔符
      */

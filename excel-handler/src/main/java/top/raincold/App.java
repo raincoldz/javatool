@@ -18,9 +18,8 @@ public class App {
             ExcelService excelService = ExcelServiceFactory.getExcelService(config);
             excelService.doService(config);
         } catch (Exception e) {
-            log.info("模式输入不符合要求");
-            System.out.println("模式输入不符合要求");
-            return;
+            log.info(e.getMessage(), e);
+            System.out.println(e.getMessage());
         }
     }
 }

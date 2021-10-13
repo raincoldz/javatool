@@ -20,22 +20,22 @@ public class ExcelSplitConfigParser implements ConfigParser {
         Integer baseColumn = null;
         Boolean deleteBaseColumn = null;
 
-        if (PropertiesUtils.getValue("filePath") == null) {
-            System.out.println("输入需要操作的Excel的路径");
+        if (!PropertiesUtils.containsKey("filePath")) {
+            System.out.println("** 输入需要操作的Excel的路径");
             filePath = in.nextLine();
         } else {
             filePath = PropertiesUtils.getValue("filePath");
         }
 
-        if (PropertiesUtils.getValue("sheetName") == null) {
-            System.out.println("输入需要操作的Sheet的名字");
+        if (!PropertiesUtils.containsKey("sheetName")) {
+            System.out.println("** 输入需要操作的Sheet的名字");
             sheetName = in.nextLine();
         } else {
             sheetName = PropertiesUtils.getValue("sheetName");
         }
 
-        if (PropertiesUtils.getValue("outputPath") == null) {
-            System.out.println("输入导出保存的路径，如果不输入则默认为程序目录下的 output目录");
+        if (!PropertiesUtils.containsKey("outputPath")) {
+            System.out.println("** 输入导出保存的路径，如果输入为空则默认为程序目录下的output目录");
             outputPath = in.nextLine();
             if (outputPath == null || outputPath.length() == 0) {
                 outputPath = "./output/";
@@ -44,15 +44,15 @@ public class ExcelSplitConfigParser implements ConfigParser {
             outputPath = PropertiesUtils.getValue("outputPath");
         }
 
-        if (PropertiesUtils.getValue("baseColumn") == null) {
-            System.out.println("输入参考的列，从1开始");
+        if (!PropertiesUtils.containsKey("baseColumn")) {
+            System.out.println("** 输入参考的列，从1开始计算");
             baseColumn = Integer.valueOf(in.nextLine()) - 1;
         } else {
             baseColumn = Integer.valueOf(PropertiesUtils.getValue("baseColumn")) - 1;
         }
 
-        if (PropertiesUtils.getValue("deleteBaseColumn") == null) {
-            System.out.println("导出时是否删除参考列，默认不删除。请输入true或false");
+        if (!PropertiesUtils.containsKey("deleteBaseColumn")) {
+            System.out.println("** 导出时是否删除参考列，请输入true或false，如果输入为空则默认不删除。");
             String isDeleteStr = in.nextLine();
             if (isDeleteStr == null || isDeleteStr.length() == 0) {
                 deleteBaseColumn = Boolean.FALSE;
