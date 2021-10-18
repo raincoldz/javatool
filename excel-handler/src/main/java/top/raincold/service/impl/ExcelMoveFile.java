@@ -28,7 +28,8 @@ public class ExcelMoveFile extends AbstractExcelServiceImpl{
             String srcFilePath = line.get(srcColumnn);
             String dstFilePath = line.get(dstColumn);
             FileUtils.moveFiles(srcFilePath, dstFilePath);
-            System.out.println(String.format("正在复制{}->{}", srcFilePath, dstFilePath));
+            System.out.println(String.format("正在复制%s->%s", srcFilePath, dstFilePath));
         }
+        System.out.println("全部复制完成！");
     }
 }

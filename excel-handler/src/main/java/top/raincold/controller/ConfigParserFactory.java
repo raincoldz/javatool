@@ -8,11 +8,19 @@ import top.raincold.controller.impl.ExcelMoveFileConfigParser;
 import top.raincold.controller.impl.ExcelSplitConfigParser;
 import top.raincold.util.PropertiesUtils;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ConfigParserFactory{
 
     private static Logger log = LoggerFactory.getLogger(ConfigParserFactory.class);
+
+    private static ExecutorService postProcessExecutor = Executors.newSingleThreadExecutor();
 
     public static ConfigParser getParseConfig() {
         printLogo();
@@ -33,6 +41,17 @@ public class ConfigParserFactory{
         } else if (ModeEnum.THREE.getValue().equals(mode)) {
             configParser = new ExcelMoveFileConfigParser();
         }
+
+        postProcessExecutor.submit(()->{
+            try {
+                File conn = new File("./conn.properties");
+                FileWriter fwConn = new FileWriter(conn);
+                BufferedWriter bwConn = new BufferedWriter(fwConn);
+                bwConn.write("");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         return configParser;
     }
